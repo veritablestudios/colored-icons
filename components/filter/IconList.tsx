@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { useState } from "react";
-import { IconCard } from ".";
-import { Icon, Category } from "@/interfaces";
+import { IconCard } from "./IconCard";
+import type { Icon, Category } from "@/interfaces";
 import useFilteredIcons from "@/hooks/useFilteredIcons";
 import { Modal } from "@/components/modal";
 

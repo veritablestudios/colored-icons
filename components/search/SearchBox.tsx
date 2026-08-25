@@ -1,9 +1,10 @@
 "use client";
+
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { SearchContext } from "@/context/SearchContextProvider";
 import { useContext, useRef } from "react";
-import { Search } from "lucide-react";
-import { ClearButton } from ".";
+import { Search, X } from "lucide-react";
 import useSearchShortcuts from "@/hooks/useSearchShortcuts";
 
 export function SearchBox() {
@@ -29,7 +30,17 @@ export function SearchBox() {
         onChange={(e) => setSearch(e.target.value)}
         aria-label="Search icons"
       />
-      {search && <ClearButton onClick={handleClearSearch} />}
+      {search && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-0 top-1/2 h-8 w-8 -translate-y-1/2 hover:bg-transparent transition-transform hover:scale-110 active:scale-95"
+          onClick={handleClearSearch}
+          aria-label="Clear search"
+        >
+          <X className="h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 }

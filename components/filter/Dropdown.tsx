@@ -10,8 +10,8 @@ import {
   ComboboxList,
   ComboboxTrigger,
 } from "@/components/ui/kibo-ui/combobox";
-import { Category } from "@/interfaces";
-import { CategoryIcon } from ".";
+import type { Category } from "@/interfaces";
+import { CategoryIcon } from "./CategoryIcon";
 
 interface DropdownProps {
   categories: Category[];

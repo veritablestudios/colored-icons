@@ -1,5 +1,8 @@
 "use client";
+
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -7,7 +10,81 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { menuItems } from "@/constants";
-import { MobileHamburger, MobileMenuItem } from ".";
+import type { MenuItem } from "@/constants/nav";
+import { cn } from "@/lib/utils";
+
+function MobileHamburger({ isOpen }: { isOpen: boolean }) {
+  return (
+    <svg
+      className="pointer-events-none"
+      data-open={isOpen ? "true" : "false"}
+      width={16}
+      height={16}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M4 12L20 12"
+        className="origin-center -translate-y-1.75 transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-315"
+      />
+      <path
+        d="M4 12H20"
+        className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+      />
+      <path
+        d="M4 12H20"
+        className="origin-center translate-y-1.75 transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-135"
+      />
+    </svg>
+  );
+}
+
+const baseMenuItemClass =
+  "block px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium rounded-sm hover:bg-accent";
+
+function MobileMenuItem({
+  item,
+  onClick,
+}: {
+  item: MenuItem;
+  onClick: () => void;
+}) {
+  const pathname = usePathname();
+
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={baseMenuItemClass}
+        onClick={onClick}
+      >
+        {item.label}
+      </a>
+    );
+  }
+
+  const active = pathname === item.href;
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        baseMenuItemClass,
+        active && "text-foreground font-semibold bg-accent",
+      )}
+      onClick={onClick}
+    >
+      {item.label}
+    </Link>
+  );
+}
 
 export const MobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,6 +1,10 @@
 "use client";
+
 import { useState, useContext } from "react";
-import { Dropdown, DevModeBanner, CategoryList, IconList } from ".";
+import { Dropdown } from "./Dropdown";
+import { DevModeBanner } from "./DevModeBanner";
+import { CategoryList } from "./CategoryList";
+import { IconList } from "./IconList";
 import { icons, categories } from "@/constants";
 import { SearchContext } from "@/context/SearchContextProvider";
 import { isDevelopmentMode, limitIconsInDev } from "@/lib/dev-utils";

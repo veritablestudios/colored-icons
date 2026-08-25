@@ -1,4 +1,6 @@
-import { StarUsOnGithubButton } from ".";
+import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { heroSubheading } from "@/constants";
 
 export const Hero = () => (
@@ -13,6 +15,15 @@ export const Hero = () => (
     <p className="mt-6 text-pretty text-lg font-normal text-gray-500 sm:text-xl max-w-lg mx-auto leading-relaxed">
       {heroSubheading}
     </p>
-    <StarUsOnGithubButton />
+    <Button asChild variant="outline" className="rounded-full mt-6">
+      <Link
+        href="https://github.com/dheereshag/coloured-icons"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Star className="text-amber-500" fill="currentColor" />
+        Star us on GitHub
+      </Link>
+    </Button>
   </section>
 );

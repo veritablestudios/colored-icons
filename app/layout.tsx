@@ -91,16 +91,9 @@ const jsonLd = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className="scroll-smooth overflow-y-scroll"
-    >
+    <html lang="en" className="scroll-smooth overflow-y-scroll">
       <body className={cn(plusJakartaSans.className, "px-8 antialiased")}>
         <script
           type="application/ld+json"

@@ -31,9 +31,7 @@ export const IconCard: React.FC<IconCardProps> = ({ icon, onClick }) => {
           aria-hidden="true"
         />
         <span className="flex flex-col gap-0.5 min-w-0">
-          <h4 className="text-gray-800 font-semibold truncate text-sm">
-            {icon.name}
-          </h4>
+          <h4 className="text-gray-800 font-semibold truncate text-sm">{icon.name}</h4>
           <p className="text-gray-400 text-xs truncate">{icon.url}</p>
         </span>
       </CardContent>

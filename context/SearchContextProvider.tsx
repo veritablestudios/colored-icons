@@ -15,16 +15,13 @@ const initialSearchContext: SearchContextType = {
   triggerFocus: () => {},
 };
 
-export const SearchContext =
-  createContext<SearchContextType>(initialSearchContext);
+export const SearchContext = createContext<SearchContextType>(initialSearchContext);
 
 interface SearchContextProviderProps {
   children: ReactNode;
 }
 
-export const SearchContextProvider = ({
-  children,
-}: SearchContextProviderProps) => {
+export const SearchContextProvider = ({ children }: SearchContextProviderProps) => {
   const [search, setSearch] = useState<string>("");
   const [focusTrigger, setFocusTrigger] = useState<number>(0);
 
@@ -32,16 +29,15 @@ export const SearchContextProvider = ({
     setFocusTrigger((prev) => prev + 1);
   }, []);
 
-  const contextValue = useMemo(() => ({
-    search,
-    setSearch,
-    focusTrigger,
-    triggerFocus,
-  }), [search, focusTrigger, triggerFocus]);
-
-  return (
-    <SearchContext.Provider value={contextValue}>
-      {children}
-    </SearchContext.Provider>
+  const contextValue = useMemo(
+    () => ({
+      search,
+      setSearch,
+      focusTrigger,
+      triggerFocus,
+    }),
+    [search, focusTrigger, triggerFocus],
   );
+
+  return <SearchContext.Provider value={contextValue}>{children}</SearchContext.Provider>;
 };

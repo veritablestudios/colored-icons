@@ -15,10 +15,7 @@ export function cn(...inputs: ClassValue[]) {
  *  - example.com -> https://example.com
  *  - http://example.com -> http://example.com
  */
-export function ensureProtocol(
-  url: string,
-  protocol: "https" | "http" = "https"
-): string {
+export function ensureProtocol(url: string, protocol: "https" | "http" = "https"): string {
   if (!url) return "";
   const trimmed = url.trim();
   if (/^https?:\/\//i.test(trimmed)) return trimmed;
@@ -30,8 +27,7 @@ export const computeIconSize = (icon: Icon): number => {
   const iconClass = icon.classes[0] ?? "";
   const iconCategory = (icon.category || "").toLowerCase();
 
-  if (iconClass.includes("horizontal") || iconClass.includes("wordmark"))
-    return 5;
+  if (iconClass.includes("horizontal") || iconClass.includes("wordmark")) return 5;
   if (iconClass.includes("vertical")) return 4;
   if (iconCategory === "animals") return 3;
   return 2;

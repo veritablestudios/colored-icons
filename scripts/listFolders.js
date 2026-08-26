@@ -58,17 +58,9 @@ const processFolder = (folderPath, folderName, category) => {
   });
 
   // Check if base logo exists, if not use wordmark as default
-  const hasBaseLogo = Object.keys(fileGroups).some(
-    (name) => name === folderName
-  );
-  const hasWordmark = Object.keys(fileGroups).some(
-    (name) => name === `${folderName}-wordmark`
-  );
-  const defaultBase = hasBaseLogo
-    ? folderName
-    : hasWordmark
-      ? `${folderName}-wordmark`
-      : null;
+  const hasBaseLogo = Object.keys(fileGroups).some((name) => name === folderName);
+  const hasWordmark = Object.keys(fileGroups).some((name) => name === `${folderName}-wordmark`);
+  const defaultBase = hasBaseLogo ? folderName : hasWordmark ? `${folderName}-wordmark` : null;
 
   if (!defaultBase) return; // Skip if neither base nor wordmark exists
 
@@ -100,10 +92,7 @@ const processFolder = (folderPath, folderName, category) => {
           : `${folderName}-${baseClassName}`;
         let classes = [normalizedBase];
 
-        const baseNameWithoutPrefix = normalizedBase.replace(
-          `${folderName}-`,
-          ""
-        );
+        const baseNameWithoutPrefix = normalizedBase.replace(`${folderName}-`, "");
         if (logoAliases[folderName]) {
           logoAliases[folderName].forEach((alias) => {
             if (normalizedBase === folderName) {
@@ -119,39 +108,28 @@ const processFolder = (folderPath, folderName, category) => {
       if (variants.dark && variants.light) {
         // For vertical/stacked variants
         if (className.includes("vertical") || className.includes("stacked")) {
-          const baseClass = className
-            .replace("vertical", "")
-            .replace("stacked", "");
+          const baseClass = className.replace("vertical", "").replace("stacked", "");
           cssContent += `.ci-${generateClassNames(baseClass + "vertical")},
 .ci-${generateClassNames(baseClass + "vertical-dark")},
 .ci-${generateClassNames(baseClass + "stacked")},
 .ci-${generateClassNames(baseClass + "stacked-dark")} {
   content: url("../public/logos/${category}/${folderName}/${variants.dark}");
 }\n\n`;
-          cssContent += `.ci-${generateClassNames(
-            baseClass + "vertical-light"
-          )},
+          cssContent += `.ci-${generateClassNames(baseClass + "vertical-light")},
 .ci-${generateClassNames(baseClass + "stacked-light")} {
   content: url("../public/logos/${category}/${folderName}/${variants.light}");
 }\n\n`;
         }
         // For horizontal/inline variants
-        else if (
-          className.includes("horizontal") ||
-          className.includes("inline")
-        ) {
-          const baseClass = className
-            .replace("horizontal", "")
-            .replace("inline", "");
+        else if (className.includes("horizontal") || className.includes("inline")) {
+          const baseClass = className.replace("horizontal", "").replace("inline", "");
           cssContent += `.ci-${generateClassNames(baseClass + "horizontal")},
 .ci-${generateClassNames(baseClass + "horizontal-dark")},
 .ci-${generateClassNames(baseClass + "inline")},
 .ci-${generateClassNames(baseClass + "inline-dark")} {
   content: url("../public/logos/${category}/${folderName}/${variants.dark}");
 }\n\n`;
-          cssContent += `.ci-${generateClassNames(
-            baseClass + "horizontal-light"
-          )},
+          cssContent += `.ci-${generateClassNames(baseClass + "horizontal-light")},
 .ci-${generateClassNames(baseClass + "inline-light")} {
   content: url("../public/logos/${category}/${folderName}/${variants.light}");
 }\n\n`;
@@ -169,9 +147,7 @@ const processFolder = (folderPath, folderName, category) => {
       } else if (variants.dark) {
         // For vertical/stacked variants
         if (className.includes("vertical") || className.includes("stacked")) {
-          const baseClass = className
-            .replace("vertical", "")
-            .replace("stacked", "");
+          const baseClass = className.replace("vertical", "").replace("stacked", "");
           cssContent += `.ci-${generateClassNames(baseClass + "vertical")},
 .ci-${generateClassNames(baseClass + "vertical-dark")},
 .ci-${generateClassNames(baseClass + "vertical-light")},
@@ -182,13 +158,8 @@ const processFolder = (folderPath, folderName, category) => {
 }\n\n`;
         }
         // For horizontal/inline variants
-        else if (
-          className.includes("horizontal") ||
-          className.includes("inline")
-        ) {
-          const baseClass = className
-            .replace("horizontal", "")
-            .replace("inline", "");
+        else if (className.includes("horizontal") || className.includes("inline")) {
+          const baseClass = className.replace("horizontal", "").replace("inline", "");
           cssContent += `.ci-${generateClassNames(baseClass + "horizontal")},
 .ci-${generateClassNames(baseClass + "horizontal-dark")},
 .ci-${generateClassNames(baseClass + "horizontal-light")},
@@ -243,9 +214,7 @@ fs.readdir(logosPath, (err, categories) => {
     let sortedContent = "";
     sortedUrls.forEach((url) => {
       const selectors = Array.from(urlGroups.get(url)).sort();
-      sortedContent += `${selectors.join(
-        ",\n"
-      )} {\n  content: url("${url}");\n}\n\n`;
+      sortedContent += `${selectors.join(",\n")} {\n  content: url("${url}");\n}\n\n`;
     });
     fs.writeFileSync(cssPath, sortedContent);
     console.log("CSS file generated and sorted successfully!");
@@ -261,10 +230,7 @@ fs.readdir(logosPath, (err, categories) => {
     if (fs.statSync(categoryPath).isDirectory()) {
       const folders = fs.readdirSync(categoryPath);
       folders.forEach((folder) => {
-        if (
-          !folder.toLowerCase().includes("stacked") &&
-          !folder.toLowerCase().includes("inline")
-        ) {
+        if (!folder.toLowerCase().includes("stacked") && !folder.toLowerCase().includes("inline")) {
           const fullFolderPath = path.join(categoryPath, folder);
           if (fs.statSync(fullFolderPath).isDirectory()) {
             const files = fs.readdirSync(fullFolderPath);
@@ -273,11 +239,8 @@ fs.readdir(logosPath, (err, categories) => {
             files.forEach((file) => {
               if (file === ".DS_Store") return;
               const isLight = file.includes("-light");
-              const baseName = file
-                .replace("-light", "")
-                .replace(/\.[^/.]+$/, "");
-              if (!fileGroups[baseName])
-                fileGroups[baseName] = { dark: false, light: false };
+              const baseName = file.replace("-light", "").replace(/\.[^/.]+$/, "");
+              if (!fileGroups[baseName]) fileGroups[baseName] = { dark: false, light: false };
               if (isLight) fileGroups[baseName].light = true;
               else fileGroups[baseName].dark = true;
             });
@@ -285,25 +248,21 @@ fs.readdir(logosPath, (err, categories) => {
             let classes = [];
             Object.entries(fileGroups).forEach(([base, variants]) => {
               // If base equals folder, use it as is; otherwise prepend folder name
-              const baseClass = base.startsWith(folder)
-                ? base
-                : `${folder}-${base}`;
+              const baseClass = base.startsWith(folder) ? base : `${folder}-${base}`;
               if (variants.dark) classes.push(baseClass);
               if (variants.light) classes.push(`${baseClass}-light`);
             });
             // Remove any invalid names; fallback to folder if empty
             classes = classes.filter(
               (cls) =>
-                !cls.toLowerCase().includes("stacked") &&
-                !cls.toLowerCase().includes("inline")
+                !cls.toLowerCase().includes("stacked") && !cls.toLowerCase().includes("inline"),
             );
             if (classes.length === 0) classes = [folder];
             // NEW: Sort the classes array
             classes.sort();
 
             // Replace switch case with logoMeta lookup
-            let displayName =
-              folder.charAt(0).toUpperCase() + folder.slice(1).toLowerCase();
+            let displayName = folder.charAt(0).toUpperCase() + folder.slice(1).toLowerCase();
             let iconUrl = `${folder}.com`;
 
             if (logoMeta[folder]) {
@@ -339,9 +298,7 @@ fs.readdir(logosPath, (err, categories) => {
         const oldIcons = JSON.parse(match[1]);
         iconsArr = iconsArr.map((newIcon) => {
           const found = oldIcons.find(
-            (oldIcon) =>
-              oldIcon.name === newIcon.name &&
-              oldIcon.category === newIcon.category
+            (oldIcon) => oldIcon.name === newIcon.name && oldIcon.category === newIcon.category,
           );
           if (found && found.url) newIcon.url = found.url;
           return newIcon;
@@ -355,7 +312,7 @@ fs.readdir(logosPath, (err, categories) => {
   const iconsContent = `const icons = ${JSON.stringify(
     iconsArr,
     null,
-    2
+    2,
   )};\nexport default icons;\n`;
   fs.writeFileSync(iconsPath, iconsContent);
   console.log("icons.ts generated successfully!");

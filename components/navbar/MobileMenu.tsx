@@ -4,11 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { menuItems } from "@/constants";
 import type { MenuItem } from "@/constants/nav";
 import { cn } from "@/lib/utils";
@@ -48,13 +44,7 @@ function MobileHamburger({ isOpen }: { isOpen: boolean }) {
 const baseMenuItemClass =
   "block px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium rounded-sm hover:bg-accent";
 
-function MobileMenuItem({
-  item,
-  onClick,
-}: {
-  item: MenuItem;
-  onClick: () => void;
-}) {
+function MobileMenuItem({ item, onClick }: { item: MenuItem; onClick: () => void }) {
   const pathname = usePathname();
 
   if (item.external) {
@@ -75,10 +65,7 @@ function MobileMenuItem({
   return (
     <Link
       href={item.href}
-      className={cn(
-        baseMenuItemClass,
-        active && "text-foreground font-semibold bg-accent",
-      )}
+      className={cn(baseMenuItemClass, active && "text-foreground font-semibold bg-accent")}
       onClick={onClick}
     >
       {item.label}
@@ -93,16 +80,9 @@ export const MobileMenu = () => {
     <div className="md:hidden">
       <Popover open={isMenuOpen} onOpenChange={setIsMenuOpen}>
         <PopoverTrigger asChild>
-          <Button
-            className="group size-8"
-            variant="ghost"
-            size="icon"
-            aria-expanded={isMenuOpen}
-          >
+          <Button className="group size-8" variant="ghost" size="icon" aria-expanded={isMenuOpen}>
             <MobileHamburger isOpen={isMenuOpen} />
-            <span className="sr-only">
-              {isMenuOpen ? "Close menu" : "Open menu"}
-            </span>
+            <span className="sr-only">{isMenuOpen ? "Close menu" : "Open menu"}</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -111,17 +91,9 @@ export const MobileMenu = () => {
           className="w-48 p-2"
           aria-describedby="mobile-menu-description"
         >
-          <nav
-            className="space-y-2"
-            role="navigation"
-            aria-label="Main navigation"
-          >
+          <nav className="space-y-2" role="navigation" aria-label="Main navigation">
             {menuItems.map((item) => (
-              <MobileMenuItem
-                key={item.href}
-                item={item}
-                onClick={() => setIsMenuOpen(false)}
-              />
+              <MobileMenuItem key={item.href} item={item} onClick={() => setIsMenuOpen(false)} />
             ))}
           </nav>
         </PopoverContent>

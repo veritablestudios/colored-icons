@@ -12,11 +12,7 @@ interface IconListProps {
   search: string;
 }
 
-export const IconList: React.FC<IconListProps> = ({
-  icons,
-  selectedCategory,
-  search,
-}) => {
+export const IconList: React.FC<IconListProps> = ({ icons, selectedCategory, search }) => {
   const [selectedIcon, setSelectedIcon] = useState<Icon | null>(null);
 
   const filteredIcons = useFilteredIcons({

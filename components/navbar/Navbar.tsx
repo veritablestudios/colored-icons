@@ -25,11 +25,7 @@ function Logo() {
   );
 }
 
-function SearchButton({
-  onClick,
-}: {
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-}) {
+function SearchButton({ onClick }: { onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void }) {
   return (
     <Button
       asChild

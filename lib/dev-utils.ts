@@ -13,16 +13,12 @@ const limitIconsInDev = (icons: Icon[], limit: number = 10): Icon[] => {
     return acc;
   }, {});
 
-  const limitedIcons = Object.entries(iconsByCategory).flatMap(
-    ([category, categoryIcons]) => {
-      const limited = categoryIcons.slice(0, limit);
-      // helpful debug when developing locally
-      console.debug(
-        `${category}: ${limited.length}/${categoryIcons.length} icons`,
-      );
-      return limited;
-    },
-  );
+  const limitedIcons = Object.entries(iconsByCategory).flatMap(([category, categoryIcons]) => {
+    const limited = categoryIcons.slice(0, limit);
+    // helpful debug when developing locally
+    console.debug(`${category}: ${limited.length}/${categoryIcons.length} icons`);
+    return limited;
+  });
 
   console.debug(`Total icons: ${limitedIcons.length}/${icons.length}`);
   return limitedIcons;

@@ -11,9 +11,7 @@ import { isDevelopmentMode, limitIconsInDev } from "@/lib/dev-utils";
 import type { Category } from "@/interfaces";
 
 export const Filter = () => {
-  const [selectedCategory, setSelectedCategory] = useState<Category>(
-    categories[0],
-  );
+  const [selectedCategory, setSelectedCategory] = useState<Category>(categories[0]);
   const { search } = useContext(SearchContext);
 
   // Use development-limited icons in dev mode, full icons in production
@@ -31,17 +29,10 @@ export const Filter = () => {
           onCategoryChange={setSelectedCategory}
         />
         <div className="sm:hidden w-full">
-          <Dropdown
-            categories={categories}
-            onCategoryChange={setSelectedCategory}
-          />
+          <Dropdown categories={categories} onCategoryChange={setSelectedCategory} />
         </div>
         <div className="flex-1">
-          <IconList
-            icons={iconsToUse}
-            selectedCategory={selectedCategory}
-            search={search}
-          />
+          <IconList icons={iconsToUse} selectedCategory={selectedCategory} search={search} />
         </div>
       </div>
     </div>

@@ -32,10 +32,4 @@ const socialIcons = [
   { name: "Twitch", classes: ["twitch"] },
 ];
 
-export {
-  CI_CSS_URL_VERSION,
-  CI_CSS_URL_LATEST,
-  features,
-  techIcons,
-  socialIcons,
-};
+export { CI_CSS_URL_VERSION, CI_CSS_URL_LATEST, features, techIcons, socialIcons };

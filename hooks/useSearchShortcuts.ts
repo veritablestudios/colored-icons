@@ -5,7 +5,7 @@ import { useEffect } from "react";
  */
 export default function useSearchShortcuts(
   ref: React.RefObject<HTMLInputElement | null>,
-  focusTrigger: number
+  focusTrigger: number,
 ) {
   // Focus when parent triggers it
   useEffect(() => {

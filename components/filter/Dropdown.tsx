@@ -18,10 +18,7 @@ interface DropdownProps {
   onCategoryChange?: (category: Category) => void;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({
-  categories,
-  onCategoryChange,
-}) => {
+export const Dropdown: React.FC<DropdownProps> = ({ categories, onCategoryChange }) => {
   const categoryData = categories.map((category) => ({
     value: category.name,
     label: category.name,
@@ -35,11 +32,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <Combobox
-      data={categoryData}
-      onValueChange={handleValueChange}
-      type="category"
-    >
+    <Combobox data={categoryData} onValueChange={handleValueChange} type="category">
       <ComboboxTrigger className="w-full" />
       <ComboboxContent>
         <ComboboxInput placeholder="Search category..." />

@@ -90,8 +90,7 @@ export default function About() {
           About Coloured Icons
         </h1>
         <p className="text-lg leading-8 text-gray-600 sm:text-xl/8">
-          A carefully curated collection of beautiful, customizable icons for your
-          next project
+          A carefully curated collection of beautiful, customizable icons for your next project
         </p>
       </div>
 
@@ -100,18 +99,15 @@ export default function About() {
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-gray-900">The Project</h2>
           <p className="text-gray-600">
-            Coloured Icons is an open-source project designed to provide developers
-            and designers with high-quality, customizable icons. Each icon is
-            carefully crafted to maintain consistency while offering flexibility in
-            color and style.
+            Coloured Icons is an open-source project designed to provide developers and designers
+            with high-quality, customizable icons. Each icon is carefully crafted to maintain
+            consistency while offering flexibility in color and style.
           </p>
         </section>
 
         {/* Explore Icons */}
         <section className="space-y-8">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Explore Our Icon Collection
-          </h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Explore Our Icon Collection</h2>
           <div className="space-y-6">
             <IconSection title="Tech Icons" icons={techIcons} />
             <IconSection title="Social Icons" icons={socialIcons} />
@@ -134,22 +130,16 @@ export default function About() {
         {/* Quick Start */}
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-gray-900">Quick Start</h2>
-          <CdnInclude
-            text="Include via CDN (another version):"
-            url={CI_CSS_URL_VERSION}
-          />
+          <CdnInclude text="Include via CDN (another version):" url={CI_CSS_URL_VERSION} />
           <CdnInclude text="Include via CDN (latest):" url={CI_CSS_URL_LATEST} />
         </section>
 
         {/* Community */}
         <section className="space-y-6">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Join the Community
-          </h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Join the Community</h2>
           <p className="text-gray-600">
-            Coloured Icons is built with and for the developer community. We welcome
-            contributions, suggestions, and feedback to make this project even
-            better.
+            Coloured Icons is built with and for the developer community. We welcome contributions,
+            suggestions, and feedback to make this project even better.
           </p>
           <Button asChild>
             <Link

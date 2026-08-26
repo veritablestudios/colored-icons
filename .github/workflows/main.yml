@@ -11,24 +11,27 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "latest"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Run update scripts
         run: node scripts/listFolders.js
-          
-      - name: Install clean-css-cli
-        run: npm install -g clean-css-cli
 
-      - name: Minify logos.css
-        run: cleancss -o app/logos.min.css app/logos.css
-
-      - name: Minify ci.css
-        run: cleancss -o app/ci.min.css app/ci.css
+      - name: Minify CSS
+        run: pnpm run minify
 
       - name: Check for changes
         id: git-check

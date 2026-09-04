@@ -213,6 +213,7 @@ pnpm lint:fix   # Run Oxlint and apply automated fixes
 pnpm fmt        # Format files with Oxfmt
 pnpm fmt:check  # Check file formatting with Oxfmt
 pnpm type-check # Run TypeScript type checking
+pnpm test       # Run unit tests with Vitest
 pnpm minify     # Minify logos.css -> logos.min.css and ci.css -> ci.min.css
 ```
 

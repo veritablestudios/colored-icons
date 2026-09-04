@@ -19,6 +19,7 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "type-check": "tsc --noEmit",
+    "test": "vitest run",
     "minify:logos": "cleancss -o app/logos.min.css app/logos.css",
     "minify:ci": "cleancss -o app/ci.min.css app/ci.css",
     "minify": "pnpm run minify:logos && pnpm run minify:ci"
@@ -54,6 +55,7 @@
     "oxlint": "^1.80.0",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.0"
   }
 }

@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 // Use relative imports for Node execution (alias @ isn't available outside Next/TS tooling)
 import logoAliases from "../constants/logoAliases.js";
@@ -295,7 +296,12 @@ fs.readdir(logosPath, (err, categories) => {
       const oldContent = fs.readFileSync(iconsPath, "utf8");
       const match = oldContent.match(/const icons = (\[.*?\]);/s);
       if (match) {
-        const oldIcons = JSON.parse(match[1]);
+        let oldIcons;
+        try {
+          oldIcons = JSON.parse(match[1]);
+        } catch {
+          oldIcons = new Function(`return ${match[1]}`)();
+        }
         iconsArr = iconsArr.map((newIcon) => {
           const found = oldIcons.find(
             (oldIcon) => oldIcon.name === newIcon.name && oldIcon.category === newIcon.category,
@@ -316,4 +322,10 @@ fs.readdir(logosPath, (err, categories) => {
   )};\nexport default icons;\n`;
   fs.writeFileSync(iconsPath, iconsContent);
   console.log("icons.ts generated successfully!");
+
+  try {
+    execSync(`npx oxfmt "${cssPath}" "${iconsPath}"`, { stdio: "ignore" });
+  } catch (fmtError) {
+    console.warn("Could not format generated files with oxfmt:", fmtError);
+  }
 });
